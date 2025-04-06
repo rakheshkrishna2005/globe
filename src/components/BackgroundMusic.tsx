@@ -19,8 +19,8 @@ const BackgroundMusic: React.FC<BackgroundMusicProps> = ({
       if (isPlaying) {
         audioRef.current.pause();
       } else {
-        audioRef.current.play().catch(error => {
-          console.error('Audio playback failed:', error);
+        audioRef.current.play().catch(err => {
+          console.error('Audio playback failed:', err);
         });
       }
       setIsPlaying(!isPlaying);
@@ -36,7 +36,7 @@ const BackgroundMusic: React.FC<BackgroundMusicProps> = ({
       if (autoPlay) {
         // Most browsers require user interaction before playing audio
         // This will attempt to play but may be blocked by browser policies
-        audioRef.current.play().catch(error => {
+        audioRef.current.play().catch(() => {
           console.log('Auto-play was prevented. User interaction required.');
           setIsPlaying(false);
         });
@@ -113,45 +113,7 @@ const BackgroundMusic: React.FC<BackgroundMusicProps> = ({
   );
 };
 
-// Add these animations to your global CSS file
-const globalStyles = `
-@keyframes soundwave1 {
-  0%, 100% { height: 3px; }
-  50% { height: 8px; }
-}
-
-@keyframes soundwave2 {
-  0%, 100% { height: 4px; }
-  30% { height: 10px; }
-  60% { height: 7px; }
-}
-
-@keyframes soundwave3 {
-  0%, 100% { height: 5px; }
-  40% { height: 12px; }
-  80% { height: 9px; }
-}
-
-.animate-soundwave1 {
-  animation: soundwave1 1.2s ease-in-out infinite;
-}
-
-.animate-soundwave2 {
-  animation: soundwave2 1.4s ease-in-out infinite;
-}
-
-.animate-soundwave3 {
-  animation: soundwave3 1s ease-in-out infinite;
-}
-
-.animate-pulse {
-  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 0.5; }
-  50% { opacity: 0.2; }
-}
-`;
+// Note: These animations should be added to your global CSS file
+// and not defined here as an unused variable
 
 export default BackgroundMusic;

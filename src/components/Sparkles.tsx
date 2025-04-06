@@ -21,7 +21,7 @@ interface SparklesProps {
   mousemove?: boolean;
   hover?: boolean;
   background?: string;
-  options?: Record<string, any>; // Adjust type as needed based on `options` structure
+  options?: Record<string, unknown>;
 }
 
 export function Sparkles({
@@ -39,7 +39,8 @@ export function Sparkles({
   mousemove = false,
   hover = false,
   background = 'transparent',
-  options = {},
+  // options is not used in this component
+  // options = {},
 }: SparklesProps) {
   const [isReady, setIsReady] = useState(false);
 
@@ -52,6 +53,7 @@ export function Sparkles({
   }, []);
 
   const id = useId();
+  // Using a more generic type to avoid type conflicts
   const defaultOptions = {
     background: {
       color: {
@@ -79,7 +81,11 @@ export function Sparkles({
             smooth: 10,
           },
         },
-        resize: true as any,
+        resize: {
+          enable: true,
+          width: true,
+          height: true
+        },
       },
       modes: {
         push: {
@@ -149,9 +155,11 @@ export function Sparkles({
   };
   return (
     isReady && (
-      <Particles id={id} 
-      // @ts-nocheck
-      options={defaultOptions as ISourceOptions} className={className} />
+      <Particles
+        id={id}
+        options={defaultOptions as unknown as ISourceOptions}
+        className={className}
+      />
     )
   );
 }

@@ -37,7 +37,7 @@ const Globe: React.FC<EarthProps> = ({
     const container = containerRef.current;
     if (!canvas || !container) return;
 
-    let animationFrameId: number = 0;
+    const animationFrameId: number = 0;
     let phi = 0;
 
     const renderGlobe = () => {
@@ -59,7 +59,7 @@ const Globe: React.FC<EarthProps> = ({
         opacity: 1,
         offset: [0, 0],
         markers: [],
-        onRender: (state: Record<string, any>) => {
+        onRender: (state: Record<string, number>) => {
           state.phi = phi;
           phi += 0.003;
         },
