@@ -3,9 +3,6 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-}
-
-@theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
@@ -26,33 +23,65 @@ body {
 }
 
 /* Music player animations */
-@keyframes soundwave1 {
-  0%, 100% { height: 3px; }
-  50% { height: 8px; }
+@keyframes sound-wave-1 {
+  0%, 100% { height: 6px; }
+  50% { height: 14px; }
 }
 
-@keyframes soundwave2 {
+@keyframes sound-wave-2 {
   0%, 100% { height: 4px; }
   30% { height: 10px; }
   60% { height: 7px; }
 }
 
-@keyframes soundwave3 {
+@keyframes sound-wave-3 {
+  0%, 100% { height: 8px; }
+  40% { height: 16px; }
+  80% { height: 12px; }
+}
+
+@keyframes sound-wave-4 {
   0%, 100% { height: 5px; }
-  40% { height: 12px; }
-  80% { height: 9px; }
+  35% { height: 12px; }
+  70% { height: 8px; }
+}
+
+@keyframes sound-wave-5 {
+  0%, 100% { height: 7px; }
+  45% { height: 15px; }
+  75% { height: 10px; }
+}
+
+.animate-sound-wave-1 {
+  animation: sound-wave-1 1.2s ease-in-out infinite;
+}
+
+.animate-sound-wave-2 {
+  animation: sound-wave-2 1.4s ease-in-out infinite;
+}
+
+.animate-sound-wave-3 {
+  animation: sound-wave-3 1s ease-in-out infinite;
+}
+
+.animate-sound-wave-4 {
+  animation: sound-wave-4 1.3s ease-in-out infinite;
+}
+
+.animate-sound-wave-5 {
+  animation: sound-wave-5 1.1s ease-in-out infinite;
 }
 
 .animate-soundwave1 {
-  animation: soundwave1 1.2s ease-in-out infinite;
+  animation: sound-wave-1 1.2s ease-in-out infinite;
 }
 
 .animate-soundwave2 {
-  animation: soundwave2 1.4s ease-in-out infinite;
+  animation: sound-wave-2 1.4s ease-in-out infinite;
 }
 
 .animate-soundwave3 {
-  animation: soundwave3 1s ease-in-out infinite;
+  animation: sound-wave-3 1s ease-in-out infinite;
 }
 
 .animate-pulse {
