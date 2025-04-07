@@ -72,7 +72,7 @@ const BackgroundMusic: React.FC<BackgroundMusicProps> = ({
           <div className={`
             absolute inset-0 rounded-full
             ${isPlaying
-              ? 'bg-blue-500/15 animate-pulse-slow'
+              ? 'bg-blue-500/15 animate-pulse'
               : 'bg-blue-500/30 animate-pulse'
             }
           `}></div>
@@ -88,7 +88,7 @@ const BackgroundMusic: React.FC<BackgroundMusicProps> = ({
           {/* Sound waves animation */}
           <div className="relative z-10 flex items-center justify-center h-4 w-6">
             {isPlaying ? (
-              <div className="flex items-end space-x-0.5">
+              <div className="flex items-center space-x-0.5">
                 <div className={`w-0.5 bg-blue-400 rounded-full animate-sound-wave-1 ${isPlaying ? 'h-4' : 'h-0.5'}`}></div>
                 <div className={`w-0.5 bg-blue-400 rounded-full animate-sound-wave-2 ${isPlaying ? 'h-2.5' : 'h-0.5'}`}></div>
                 <div className={`w-0.5 bg-blue-400 rounded-full animate-sound-wave-3 ${isPlaying ? 'h-5' : 'h-0.5'}`}></div>
@@ -96,7 +96,7 @@ const BackgroundMusic: React.FC<BackgroundMusicProps> = ({
                 <div className={`w-0.5 bg-blue-400 rounded-full animate-sound-wave-5 ${isPlaying ? 'h-4' : 'h-0.5'}`}></div>
               </div>
             ) : (
-              <div className="flex items-end space-x-0.5">
+              <div className="flex items-center space-x-0.5">
                 <div className="w-0.5 h-0.5 bg-blue-400 rounded-full"></div>
                 <div className="w-0.5 h-0.5 bg-blue-400 rounded-full"></div>
                 <div className="w-0.5 h-0.5 bg-blue-400 rounded-full"></div>
@@ -138,7 +138,7 @@ const BackgroundMusic: React.FC<BackgroundMusicProps> = ({
           <div className={`
             absolute inset-0 rounded-full
             ${isPlaying
-              ? 'bg-blue-500/15 animate-pulse-slow'
+              ? 'bg-blue-500/15 animate-pulse'
               : 'bg-blue-500/30 animate-pulse'
             }
           `}></div>
