@@ -5,14 +5,12 @@ import { Sparkles } from '@/components/Sparkles';
 import BackgroundMusic from '@/components/BackgroundMusic';
 
 export default function Home() {
-  // Use useRef for hover states to prevent re-renders
   const [controlState, setControlState] = useState({
     isGithubHovered: false,
     isFullscreenHovered: false,
     isFullscreen: false
   });
 
-  // Check fullscreen status
   const checkFullscreen = useCallback(() => {
     setControlState(prev => ({
       ...prev,
@@ -20,7 +18,6 @@ export default function Home() {
     }));
   }, []);
 
-  // Add event listener for fullscreen changes
   useEffect(() => {
     document.addEventListener('fullscreenchange', checkFullscreen);
     return () => {
@@ -28,7 +25,6 @@ export default function Home() {
     };
   }, [checkFullscreen]);
 
-  // Toggle fullscreen
   const toggleFullscreen = useCallback(() => {
     if (!document.fullscreenElement) {
       document.documentElement.requestFullscreen().catch(err => {
@@ -41,7 +37,6 @@ export default function Home() {
     }
   }, []);
 
-  // Handlers for hover states that don't cause re-renders of the main components
   const handleGithubHoverChange = useCallback((isHovered: boolean) => {
     setControlState(prev => ({
       ...prev,
@@ -56,21 +51,17 @@ export default function Home() {
     }));
   }, []);
 
-  // Memoize the Globe component to prevent re-renders
   const memoizedGlobe = useMemo(() => <Globe />, []);
-
-  // Memoize the Sparkles component to prevent re-renders
   const memoizedSparkles = useMemo(() => (
     <Sparkles
       density={1800}
       speed={1.2}
       color="#48b6ff"
       direction="top"
-      className="absolute inset-x-0 bottom-0 h-full w-full"
+      className="absolute inset-0 w-full h-full pointer-events-none"
     />
   ), []);
 
-  // Memoize the control buttons to isolate their state changes
   const controlButtons = useMemo(() => {
     const { isGithubHovered, isFullscreenHovered, isFullscreen } = controlState;
 
@@ -97,18 +88,8 @@ export default function Home() {
             `}
             aria-label="View on GitHub"
           >
-            {/* Pulsing background effect */}
             <div className="absolute inset-0 rounded-full bg-blue-500/30 animate-pulse"></div>
-
-            {/* Outer glow ring */}
-            <div className={`
-              absolute inset-0 rounded-full
-              border border-blue-400/50
-              scale-110 opacity-70
-              transition-all duration-500
-            `}></div>
-
-            {/* GitHub Logo */}
+            <div className="absolute inset-0 rounded-full border border-blue-400/50 scale-110 opacity-70 transition-all duration-500"></div>
             <div className="relative z-10">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-400">
                 <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
@@ -136,18 +117,8 @@ export default function Home() {
             `}
             aria-label={isFullscreen ? "Exit Fullscreen" : "Enter Fullscreen"}
           >
-            {/* Pulsing background effect */}
             <div className="absolute inset-0 rounded-full bg-blue-500/30 animate-pulse"></div>
-
-            {/* Outer glow ring */}
-            <div className={`
-              absolute inset-0 rounded-full
-              border border-blue-400/50
-              scale-110 opacity-70
-              transition-all duration-500
-            `}></div>
-
-            {/* Fullscreen Icon */}
+            <div className="absolute inset-0 rounded-full border border-blue-400/50 scale-110 opacity-70 transition-all duration-500"></div>
             <div className="relative z-10">
               {isFullscreen ? (
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-400">
@@ -170,24 +141,26 @@ export default function Home() {
       <Head>
         <title>Glowbe - Interstellar Experience</title>
       </Head>
-      <div className="min-h-screen flex flex-col items-center justify-center bg-black-900">
-        {/* Render Globe */}
-        {memoizedGlobe}
-
-        {/* Render Sparkles as a background or overlay */}
-        <div className="absolute inset-0 z-[2] w-screen h-screen overflow-hidden pt-16 pb-16 [mask-image:radial-gradient(100%_100%,white,transparent)] before:absolute before:inset-0 before:bg-[radial-gradient(circle_at_center,#3273ff,transparent_90%)] before:opacity-40 after:absolute">
+      <main className="relative min-h-screen w-full bg-black overflow-hidden">
+        {/* Background Sparkles */}
+        <div className="absolute inset-0 z-0 [mask-image:radial-gradient(100%_100%,white,transparent)] before:absolute before:inset-0 before:bg-[radial-gradient(circle_at_center,#3273ff,transparent_90%)] before:opacity-40">
           {memoizedSparkles}
         </div>
 
-        {/* Background Music Player */}
+        {/* Center Globe */}
+        <div className="absolute inset-0 flex items-center justify-center z-10">
+          {memoizedGlobe}
+        </div>
+
+        {/* Music */}
         <BackgroundMusic
           audioSrc="/music/interstellar.mp3"
           autoPlay={true}
         />
 
-        {/* Render memoized control buttons */}
+        {/* Controls */}
         {controlButtons}
-      </div>
+      </main>
     </>
   );
 }
